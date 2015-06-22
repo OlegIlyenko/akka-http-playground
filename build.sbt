@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   "org.scaldi" %% "scaldi" % "0.5.6",
   "com.typesafe.akka" %% "akka-http-experimental" % "1.0-RC3",
   "com.typesafe.akka" %% "akka-http-spray-json-experimental" % "1.0-RC3",
+  "de.heikoseeberger" %% "akka-sse" % "0.13.0",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   "com.typesafe.akka" %% "akka-stream-testkit-experimental" % "1.0-RC3" % "test"
 )

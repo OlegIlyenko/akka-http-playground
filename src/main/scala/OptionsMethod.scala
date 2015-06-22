@@ -11,19 +11,19 @@ object OptionsMethod extends App  {
   implicit val system = ActorSystem("my-options")
   implicit val materializer = ActorFlowMaterializer()
 
-    implicit def rejectionHandler =
-      RejectionHandler.newBuilder().handleAll[MethodRejection] { rejections =>
-        val methods = rejections map (_.supported)
-        lazy val names = methods map (_.name) mkString ", "
+  implicit def rejectionHandler =
+    RejectionHandler.newBuilder().handleAll[MethodRejection] { rejections =>
+      val methods = rejections map (_.supported)
+      lazy val names = methods map (_.name) mkString ", "
 
-        respondWithHeader(Allow(methods)) {
-          options {
-            complete(s"Supported methods : $names.")
-          } ~
-          complete(MethodNotAllowed, s"HTTP method not allowed, supported methods: $names!")
-        }
+      respondWithHeader(Allow(methods)) {
+        options {
+          complete(s"Supported methods : $names.")
+        } ~
+        complete(MethodNotAllowed, s"HTTP method not allowed, supported methods: $names!")
       }
-      .result()
+    }
+    .result()
 
   val route: Route =
     pathPrefix("orders") {
